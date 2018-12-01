@@ -11,5 +11,6 @@ namespace MedicalTest
         public int Id { get; set; }
         public double Stake { get; set; }
         public DateTime CreateDate { get; set; }
+        public string Status { get; set; }
     }
 }

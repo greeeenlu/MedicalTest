@@ -34,6 +34,16 @@ namespace MedicalTest
             Assert.AreEqual("2018-12-01", betDto.Date);
             Assert.AreEqual(344, betDto.Amount);
         }
+
+        [Test]
+        public void TransferBet_ByPropertyName()
+        {
+            Bet bet = new Bet() { Id = 1, Stake = 344.4, CreateDate = new DateTime(2018, 12, 1), Status = "Running" };
+
+            BetDto betDto = Mapper.TransferBet(bet);
+
+            Assert.AreEqual("Running", betDto.Status);
+        }
     }
 
     public class Mapper
@@ -48,6 +58,10 @@ namespace MedicalTest
             return map.Maping(bet);
         }
 
+        internal static BetDto TransferBet(Bet bet)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public interface IMapper<TSource, TResult>
@@ -55,10 +69,11 @@ namespace MedicalTest
         TResult Maping(TSource bet);
     }
 
-    public class LuluMapper : IMapper<Bet, BetDto>{
+    public class LuluMapper : IMapper<Bet, BetDto>
+    {
         public BetDto Maping(Bet b)
         {
-           return new BetDto()
+            return new BetDto()
             {
                 BetId = b.Id,
                 Date = b.CreateDate.ToString("yyyy-MM-dd"),
@@ -67,7 +82,6 @@ namespace MedicalTest
         }
     }
 
-
     public class BetDto
     {
         public int Amount { get; set; }
@@ -75,5 +89,7 @@ namespace MedicalTest
         public string Date { get; set; }
 
         public int BetId { get; set; }
+
+        public string Status { get; set; }
     }
 }

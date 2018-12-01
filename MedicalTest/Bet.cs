@@ -2,7 +2,7 @@
 
 namespace MedicalTest
 {
-    internal class Bet
+    public class Bet
     {
         public Bet()
         {
